@@ -1,0 +1,14 @@
+package app
+
+import (
+	"fmt"
+
+	//	"github.com/Scalingo/cli/Godeps/_workspace/src/gopkg.in/errgo.v1"
+	//	"github.com/gbentry/heroku-go"
+	"github.com/Scalingo/cli/api"
+)
+
+func Create(appName string) error {
+	fmt.Println(appName + "created")
+	return nil
+}
