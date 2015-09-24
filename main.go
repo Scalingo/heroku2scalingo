@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/Zyko0/scalingo-from-heroku/app"
-	"github.com/Zyko0/scalingo-from-heroku/config"
+	"github.com/Scalingo/heroku2scalingo/app"
+	"github.com/Scalingo/heroku2scalingo/config"
 	"gopkg.in/errgo.v1"
 )
 

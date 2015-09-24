@@ -1,53 +1,13 @@
 {
-	"ImportPath": "github.com/Zyko0/scalingo-from-heroku",
+	"ImportPath": "github.com/Scalingo/heroku2scalingo",
 	"GoVersion": "go1.4.2",
 	"Packages": [
 		"."
 	],
 	"Deps": [
 		{
-			"ImportPath": "code.google.com/p/gopass",
-			"Rev": "3b39664481b57ad99d34c86bd64090c28eacc7a1"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/api",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/config",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/debug",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/httpclient",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/io",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/term",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/cli/users",
-			"Comment": "1.0.0-63-gbeaf889",
-			"Rev": "beaf889ffd393d0846b134c8cc62bc55d72c1b46"
-		},
-		{
-			"ImportPath": "github.com/Scalingo/envconfig",
-			"Comment": "v1.0.0-3-g8eb48cc",
-			"Rev": "8eb48cc6f27eafda8e3a9627edba494a1d229a01"
+			"ImportPath": "github.com/Scalingo/go-scalingo",
+			"Rev": "ebac1c315c6aec57f984442b1a23612a3b9d9c80"
 		},
 		{
 			"ImportPath": "github.com/bgentry/go-netrc/netrc",
@@ -60,11 +20,6 @@
 		{
 			"ImportPath": "github.com/pborman/uuid",
 			"Rev": "cccd189d45f7ac3368a0d127efb7f4d08ae0b655"
-		},
-		{
-			"ImportPath": "github.com/stvp/rollbar",
-			"Comment": "v0.2.0-2-g14b7f64",
-			"Rev": "14b7f642b7f2f66b9322ffb89e787d7e23d338f4"
 		},
 		{
 			"ImportPath": "gopkg.in/errgo.v1",
