@@ -30,7 +30,7 @@ func PushRepository() error {
 }
 
 func CloneRepository() error {
-	fmt.Println("Cloning from " + HerokuApp.GitURL + " ...")
+	fmt.Println("Cloning into " + HerokuApp.GitURL + " ...")
 
 	err := git.CloneHerokuApp(HerokuApp)
 	if err != nil {
@@ -66,7 +66,10 @@ func CreateScalingoApp() error {
 
 	for k := range env {
 		fmt.Printf("Add %s=%s\n", k, env[k])
-		scalingo.VariableSet(ScalingoApp.Name, k, env[k])
+		_, _, err = scalingo.VariableSet(ScalingoApp.Name, k, env[k])
+		if err != nil {
+			return errgo.Mask(err)
+		}
 	}
 
 	return nil

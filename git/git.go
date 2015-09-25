@@ -36,17 +36,9 @@ func PushScalingoApp(herokuAppName string) error {
 		return errgo.Mask(err)
 	}
 
-	err = exec.Command("git", "add", "--all").Run()
-	if err != nil {
-		return errgo.Mask(err)
-	}
-
-	err = exec.Command("git", "commit", "-m", "\"Scalingo Migration\"").Run()
-	if err != nil {
-		return errgo.Mask(err)
-	}
-
-	err = exec.Command("git", "push", "scalingo", "master").Run()
+	var out []byte
+	out, err = exec.Command("git", "push", "scalingo", "master").CombinedOutput()
+	fmt.Printf("%s\n", string(out))
 	if err != nil {
 		return errgo.Mask(err)
 	}
