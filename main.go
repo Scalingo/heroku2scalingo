@@ -9,6 +9,7 @@ import (
 	"github.com/Scalingo/heroku2scalingo/app"
 	"github.com/Scalingo/heroku2scalingo/config"
 	"github.com/Scalingo/heroku2scalingo/git"
+	"github.com/Scalingo/heroku2scalingo/signals"
 	"github.com/bgentry/heroku-go"
 	"gopkg.in/errgo.v1"
 )
@@ -19,7 +20,7 @@ var (
 )
 
 func PushRepository() error {
-	fmt.Println("Pushing to   " + ScalingoApp.GitUrl + " ...")
+	fmt.Println("Pushing to " + ScalingoApp.GitUrl + " ...")
 
 	err := git.PushScalingoApp(HerokuApp.Name)
 	if err != nil {
@@ -30,8 +31,6 @@ func PushRepository() error {
 }
 
 func CloneRepository() error {
-	fmt.Println("Cloning into " + HerokuApp.GitURL + " ...")
-
 	err := git.CloneHerokuApp(HerokuApp)
 	if err != nil {
 		return errgo.Mask(err)
@@ -47,6 +46,9 @@ func CloneRepository() error {
 
 func CreateScalingoApp() error {
 	var err error
+
+	go signals.Handle()
+
 	fmt.Printf("Creating scalingo app %s ...\n", HerokuApp.Name)
 
 	ScalingoApp, err = app.Create(HerokuApp.Name)
@@ -65,7 +67,7 @@ func CreateScalingoApp() error {
 	}
 
 	for k := range env {
-		fmt.Printf("Add %s=%s\n", k, env[k])
+		fmt.Printf("-----> %s has been set to %s\n", k, env[k])
 		_, _, err = scalingo.VariableSet(ScalingoApp.Name, k, env[k])
 		if err != nil {
 			return errgo.Mask(err)
@@ -86,7 +88,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	fmt.Printf("\nThe migration will continue with the user %s / %s\n\n", u.Username, u.Email)
+	scalingo.CurrentUser = u
+	fmt.Println()
+	fmt.Printf("The migration will continue with the user %s / %s\n\n", u.Username, u.Email)
 
 	fmt.Println("Heroku authentication ...")
 	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
@@ -98,11 +102,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+	fmt.Println()
 
 	err = CloneRepository()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+	fmt.Println()
 
 	err = PushRepository()
 	if err != nil {

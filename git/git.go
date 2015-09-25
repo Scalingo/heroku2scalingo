@@ -22,7 +22,10 @@ func CloneHerokuApp(app *heroku.App) error {
 		return errgo.Mask(err)
 	}
 
-	err = exec.Command("git", "clone", app.GitURL).Run()
+	cmd := exec.Command("git", "clone", app.GitURL)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
 	if err != nil {
 		return errgo.Mask(err)
 	}
@@ -36,9 +39,10 @@ func PushScalingoApp(herokuAppName string) error {
 		return errgo.Mask(err)
 	}
 
-	var out []byte
-	out, err = exec.Command("git", "push", "scalingo", "master").CombinedOutput()
-	fmt.Printf("%s\n", string(out))
+	cmd := exec.Command("git", "push", "scalingo", "master")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	err = cmd.Run()
 	if err != nil {
 		return errgo.Mask(err)
 	}
