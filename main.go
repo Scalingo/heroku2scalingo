@@ -5,13 +5,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/Scalingo/go-scalingo"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/bgentry/heroku-go"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 	"github.com/Scalingo/heroku2scalingo/app"
 	"github.com/Scalingo/heroku2scalingo/config"
 	"github.com/Scalingo/heroku2scalingo/git"
 	"github.com/Scalingo/heroku2scalingo/signals"
-	"github.com/bgentry/heroku-go"
-	"gopkg.in/errgo.v1"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 )
 
 func PushRepository() error {
-	fmt.Println("Pushing to " + ScalingoApp.GitUrl + " ...")
+	fmt.Println("Pushing to " + ScalingoApp.GitUrl + "...")
 
 	err := git.PushScalingoApp(HerokuApp.Name)
 	if err != nil {
@@ -47,7 +47,7 @@ func CloneRepository() error {
 func CreateScalingoApp() error {
 	var err error
 
-	fmt.Printf("Creating scalingo app %s ...\n", HerokuApp.Name)
+	fmt.Printf("Creating scalingo app %s...\n", HerokuApp.Name)
 
 	ScalingoApp, err = app.Create(HerokuApp.Name)
 	if err != nil {
@@ -56,9 +56,9 @@ func CreateScalingoApp() error {
 
 	fmt.Println("Scalingo App '" + ScalingoApp.Name + "' created.")
 	fmt.Println()
-	fmt.Println("Importing Heroku environment to Scalingo ...")
+	fmt.Println("Importing Heroku environment to Scalingo...")
 
-	err = app.SetScalingoEnv(ScalingoApp.Name)
+	err = app.SetScalingoEnv(HerokuApp.Name, ScalingoApp.Name)
 	if err != nil {
 		return errgo.Mask(err)
 	}
@@ -74,7 +74,7 @@ func main() {
 
 	go signals.Handle()
 
-	fmt.Println("Heroku authentication ...")
+	fmt.Println("Heroku authentication...")
 	var err error
 	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
 	if err != nil {
@@ -82,7 +82,7 @@ func main() {
 	}
 	fmt.Println()
 
-	fmt.Println("Scalingo authentication ...")
+	fmt.Println("Scalingo authentication...")
 	u, err := config.Authenticator.LoadAuth()
 	if err != nil {
 		log.Fatal(err.Error())

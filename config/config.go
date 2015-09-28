@@ -7,8 +7,8 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/Scalingo/envconfig"
-	"github.com/Scalingo/go-scalingo"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/envconfig"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
 )
 
 type Config struct {

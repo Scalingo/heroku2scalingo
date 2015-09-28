@@ -1,6 +1,6 @@
 package scalingo
 
-import "gopkg.in/errgo.v1"
+import "github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 
 type Key struct {
 	ID      string `json:"id"`

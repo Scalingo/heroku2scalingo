@@ -6,9 +6,9 @@ import (
 	"os/exec"
 	"path"
 
-	"github.com/Scalingo/cli/Godeps/_workspace/src/gopkg.in/errgo.v1"
-	"github.com/Scalingo/go-scalingo"
-	"github.com/bgentry/heroku-go"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/bgentry/heroku-go"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 )
 
 func CloneHerokuApp(app *heroku.App) error {

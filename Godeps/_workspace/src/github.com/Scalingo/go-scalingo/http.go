@@ -10,11 +10,11 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/Scalingo/go-scalingo/debug"
-	"github.com/Scalingo/go-scalingo/httpclient"
-	"github.com/Scalingo/go-scalingo/io"
-	"github.com/Scalingo/go-scalingo/users"
-	"gopkg.in/errgo.v1"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/debug"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/httpclient"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/io"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/users"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 )
 
 var CurrentUser *users.User
@@ -51,7 +51,7 @@ func (req *APIRequest) FillDefaultValues() error {
 			return errgo.Mask(err, errgo.Any)
 		}
 		if user == nil {
-			fmt.Println("You need to be authenticated to use Scalingo client.\nNo account ? → https://scalingo.com")
+			fmt.Println("You need to be authenticated to use Scalingo client.\nNo account ? → https://scalingo.com/signup")
 			return errgo.New("Authentication required")
 		}
 		CurrentUser = user
@@ -83,6 +83,8 @@ func (req *APIRequest) Do() (*http.Response, error) {
 	case "PATCH":
 		fallthrough
 	case "POST":
+		fallthrough
+	case "PUT":
 		fallthrough
 	case "WITH_BODY":
 		buffer, err := json.Marshal(req.Params)

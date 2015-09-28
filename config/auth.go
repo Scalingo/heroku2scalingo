@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Scalingo/go-scalingo"
-	"github.com/Scalingo/go-scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
-	"github.com/Scalingo/go-scalingo/users"
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/code.google.com/p/gopass"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/users"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 )
 
 type HtoSAuthenticator struct{}

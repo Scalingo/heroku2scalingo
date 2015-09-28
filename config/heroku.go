@@ -5,9 +5,9 @@ import (
 	"os/user"
 	"path"
 
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/bgentry/go-netrc/netrc"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/bgentry/heroku-go"
 	"github.com/Scalingo/heroku2scalingo/input"
-	"github.com/bgentry/go-netrc/netrc"
-	"github.com/bgentry/heroku-go"
 )
 
 var (
@@ -26,7 +26,7 @@ func init() {
 	answer := true
 	machine, err = netrc.FindMachine(path.Join(usr.HomeDir, ".netrc"), herokuApiUrl)
 	if err == nil {
-		answer = input.AskForConfirmation("An authentication token has been found, do you allow us to use it? [y/n] ")
+		answer = input.AskForConfirmation("A Heroku authentication token has been found, do you allow us to use it? [y/n] ")
 		apiKey = machine.Password
 	}
 	if err != nil || !answer {

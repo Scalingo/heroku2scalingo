@@ -18,7 +18,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/pborman/uuid"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/pborman/uuid"
 )
 
 const (

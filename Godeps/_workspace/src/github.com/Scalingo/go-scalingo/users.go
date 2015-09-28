@@ -2,10 +2,9 @@ package scalingo
 
 import (
 	"encoding/json"
-	"fmt"
 
-	"github.com/Scalingo/go-scalingo/users"
-	"gopkg.in/errgo.v1"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/users"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 )
 
 type SelfResults struct {
@@ -21,7 +20,6 @@ func Self() (*users.User, error) {
 		return nil, errgo.Mask(err, errgo.Any)
 	}
 	defer res.Body.Close()
-	fmt.Println(res.Body)
 	var u *users.User
 	err = json.NewDecoder(res.Body).Decode(&u)
 	if err != nil {

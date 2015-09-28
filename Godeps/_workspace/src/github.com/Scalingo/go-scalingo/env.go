@@ -1,6 +1,6 @@
 package scalingo
 
-import "gopkg.in/errgo.v1"
+import "github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 
 const (
 	EnvNameMaxLength  = 64
@@ -74,6 +74,30 @@ func VariableSet(app string, name string, value string) (*Variable, int, error) 
 	}
 
 	return params.Variable, res.StatusCode, nil
+}
+
+func VariableMultipleSet(app string, variables Variables) (Variables, int, error) {
+	req := &APIRequest{
+		Method:   "PUT",
+		Endpoint: "/apps/" + app + "/variables",
+		Params: map[string]Variables{
+			"variables": variables,
+		},
+		Expected: Statuses{200, 201},
+	}
+	res, err := req.Do()
+	if err != nil {
+		return nil, 0, errgo.Mask(err, errgo.Any)
+	}
+	defer res.Body.Close()
+
+	var params VariablesRes
+	err = ParseJSON(res, &params)
+	if err != nil {
+		return nil, 0, errgo.Mask(err, errgo.Any)
+	}
+
+	return params.Variables, res.StatusCode, nil
 }
 
 func VariableUnset(app string, id string) error {
