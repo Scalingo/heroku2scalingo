@@ -28,6 +28,8 @@ var Authenticator = &HtoSAuthenticator{}
 func Auth() (*users.User, error) {
 	var user *users.User
 	var err error
+
+	fmt.Println("You need to be authenticated to use Scalingo client.\nNo account ? → https://scalingo.com")
 	for i := 0; i < 3; i++ {
 		user, err = tryAuth()
 		if err == nil {
@@ -51,10 +53,15 @@ func Auth() (*users.User, error) {
 }
 
 func (a *HtoSAuthenticator) StoreAuth(user *users.User) error {
+	scalingo.CurrentUser = user
 	return nil
 }
 
 func (a *HtoSAuthenticator) LoadAuth() (*users.User, error) {
+	if scalingo.CurrentUser != nil {
+		return scalingo.CurrentUser, nil
+	}
+
 	file, err := os.OpenFile(C.AuthFile, os.O_RDONLY, 0644)
 	if os.IsNotExist(err) {
 		return nil, nil

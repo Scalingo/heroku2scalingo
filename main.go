@@ -47,8 +47,6 @@ func CloneRepository() error {
 func CreateScalingoApp() error {
 	var err error
 
-	go signals.Handle()
-
 	fmt.Printf("Creating scalingo app %s ...\n", HerokuApp.Name)
 
 	ScalingoApp, err = app.Create(HerokuApp.Name)
@@ -83,20 +81,23 @@ func main() {
 		return
 	}
 
+	go signals.Handle()
+
+	fmt.Println("Heroku authentication ...")
+	var err error
+	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	fmt.Println()
+
 	fmt.Println("Scalingo authentication ...")
 	u, err := config.Authenticator.LoadAuth()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	scalingo.CurrentUser = u
 	fmt.Println()
 	fmt.Printf("The migration will continue with the user %s / %s\n\n", u.Username, u.Email)
-
-	fmt.Println("Heroku authentication ...")
-	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
-	if err != nil {
-		log.Fatal(err.Error())
-	}
 
 	err = CreateScalingoApp()
 	if err != nil {
