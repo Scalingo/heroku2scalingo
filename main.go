@@ -58,18 +58,9 @@ func CreateScalingoApp() error {
 	fmt.Println()
 	fmt.Println("Importing Heroku environment to Scalingo ...")
 
-	var env map[string]string
-	env, err = config.HerokuClient.ConfigVarInfo(HerokuApp.Name)
+	err = app.SetScalingoEnv(ScalingoApp.Name)
 	if err != nil {
 		return errgo.Mask(err)
-	}
-
-	for k := range env {
-		fmt.Printf("-----> %s has been set to %s\n", k, env[k])
-		_, _, err = scalingo.VariableSet(ScalingoApp.Name, k, env[k])
-		if err != nil {
-			return errgo.Mask(err)
-		}
 	}
 
 	return nil

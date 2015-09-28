@@ -26,7 +26,7 @@ func init() {
 	answer := true
 	machine, err = netrc.FindMachine(path.Join(usr.HomeDir, ".netrc"), herokuApiUrl)
 	if err == nil {
-		answer = input.AskForConfirmation("An authentication token has been found, do you allow us to use it? [Y/n] ")
+		answer = input.AskForConfirmation("An authentication token has been found, do you allow us to use it? [y/n] ")
 		apiKey = machine.Password
 	}
 	if err != nil || !answer {
