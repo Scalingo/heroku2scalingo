@@ -106,9 +106,4 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
-	err = app.ScaleContainers(HerokuApp.Name, ScalingoApp.Name)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
 }
