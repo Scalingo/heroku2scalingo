@@ -1,0 +1,38 @@
+{
+	"ImportPath": "github.com/Scalingo/heroku2scalingo",
+	"GoVersion": "go1.4.2",
+	"Packages": [
+		"github.com/Scalingo/heroku2scalingo/..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/gopass",
+			"Rev": "3b39664481b57ad99d34c86bd64090c28eacc7a1"
+		},
+		{
+			"ImportPath": "github.com/Scalingo/envconfig",
+			"Comment": "v1.0.0-3-g8eb48cc",
+			"Rev": "8eb48cc6f27eafda8e3a9627edba494a1d229a01"
+		},
+		{
+			"ImportPath": "github.com/Scalingo/go-scalingo",
+			"Rev": "b826034ac432adbdd39be73fb06f890911a35320"
+		},
+		{
+			"ImportPath": "github.com/bgentry/go-netrc/netrc",
+			"Rev": "9fd32a8b3d3d3f9d43c341bfe098430e07609480"
+		},
+		{
+			"ImportPath": "github.com/bgentry/heroku-go",
+			"Rev": "ee4032d686ae18a765ac0df68c9524fba2a29ce3"
+		},
+		{
+			"ImportPath": "github.com/pborman/uuid",
+			"Rev": "cccd189d45f7ac3368a0d127efb7f4d08ae0b655"
+		},
+		{
+			"ImportPath": "gopkg.in/errgo.v1",
+			"Rev": "1a3d4d77253d47458a42542b4c0bf709fcd5d715"
+		}
+	]
+}
