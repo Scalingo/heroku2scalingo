@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
@@ -11,6 +10,7 @@ import (
 	"github.com/Scalingo/heroku2scalingo/app"
 	"github.com/Scalingo/heroku2scalingo/config"
 	"github.com/Scalingo/heroku2scalingo/git"
+	"github.com/Scalingo/heroku2scalingo/io"
 	"github.com/Scalingo/heroku2scalingo/signals"
 )
 
@@ -20,7 +20,8 @@ var (
 )
 
 func PushRepository() error {
-	fmt.Println("Pushing to " + ScalingoApp.GitUrl + "...")
+	fmt.Println()
+	io.Info("Pushing to", ScalingoApp.GitUrl+"...\n")
 
 	err := git.PushScalingoApp(HerokuApp.Name)
 	if err != nil {
@@ -31,6 +32,7 @@ func PushRepository() error {
 }
 
 func CloneRepository() error {
+	io.Info("Cloning Heroku GIT repository\n")
 	err := git.CloneHerokuApp(HerokuApp)
 	if err != nil {
 		return errgo.Mask(err)
@@ -47,63 +49,62 @@ func CloneRepository() error {
 func CreateScalingoApp() error {
 	var err error
 
-	fmt.Printf("Creating scalingo app %s...\n", HerokuApp.Name)
+	io.Infof("Creating scalingo app %s...\n", HerokuApp.Name)
 
 	ScalingoApp, err = app.Create(HerokuApp.Name)
 	if err != nil {
 		return errgo.Mask(err)
 	}
+	io.Print("Scalingo App '" + ScalingoApp.Name + "' created.\n")
 
-	fmt.Println("Scalingo App '" + ScalingoApp.Name + "' created.")
-	fmt.Println()
-	fmt.Println("Importing Heroku environment to Scalingo...")
-
+	io.Info("Importing Heroku environment to Scalingo...")
 	err = app.SetScalingoEnv(HerokuApp.Name, ScalingoApp.Name)
 	if err != nil {
 		return errgo.Mask(err)
 	}
+	fmt.Println()
+	io.Print("Importation successful\n")
 
 	return nil
 }
 
 func main() {
 	if len(os.Args) <= 1 {
-		log.Fatal("<Usage>: " + os.Args[0] + " <appName>")
-		return
+		io.Error("<Usage>:", os.Args[0], "<app-name>")
 	}
 
 	go signals.Handle()
 
-	fmt.Println("Heroku authentication...")
+	io.Infof("Heroku authentication... ")
 	var err error
 	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
 	if err != nil {
-		log.Fatal(err.Error())
+		fmt.Println("ERR")
+		io.Error(err)
 	}
-	fmt.Println()
+	fmt.Println("OK")
 
-	fmt.Println("Scalingo authentication...")
+	io.Infof("Scalingo authentication... ")
 	u, err := config.Authenticator.LoadAuth()
 	if err != nil {
-		log.Fatal(err.Error())
+		fmt.Println("ERR")
+		io.Error(err)
 	}
-	fmt.Println()
-	fmt.Printf("The migration will continue with the user %s / %s\n\n", u.Username, u.Email)
+	fmt.Println("OK")
 
+	io.Printf("You are now logged as %s/%s\n\n", u.Username, u.Email)
 	err = CreateScalingoApp()
 	if err != nil {
-		log.Fatal(err.Error())
+		io.Error(err)
 	}
-	fmt.Println()
 
 	err = CloneRepository()
 	if err != nil {
-		log.Fatal(err.Error())
+		io.Error(err)
 	}
-	fmt.Println()
 
 	err = PushRepository()
 	if err != nil {
-		log.Fatal(err.Error())
+		io.Error(err)
 	}
 }

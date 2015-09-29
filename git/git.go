@@ -29,7 +29,6 @@ func CloneHerokuApp(app *heroku.App) error {
 	if err != nil {
 		return errgo.Mask(err)
 	}
-
 	return nil
 }
 
