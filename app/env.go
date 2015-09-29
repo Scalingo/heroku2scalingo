@@ -7,6 +7,7 @@ import (
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
 	"github.com/Scalingo/heroku2scalingo/config"
+	"github.com/Scalingo/heroku2scalingo/io"
 )
 
 func SetScalingoEnv(herokuAppName, scalingoAppName string) error {
@@ -34,7 +35,7 @@ func SetScalingoEnv(herokuAppName, scalingoAppName string) error {
 	}
 
 	for _, v := range variables {
-		fmt.Printf("-------> %s has been set to %s\n", v.Name, v.Value)
+		io.Printf("%s has been set to %s\n", v.Name, v.Value)
 	}
 
 	return nil
