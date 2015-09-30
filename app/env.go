@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
@@ -20,7 +19,8 @@ func SetScalingoEnv(herokuAppName, scalingoAppName string) error {
 
 	for k := range env {
 		if strings.TrimSpace(env[k]) == "" {
-			fmt.Printf("Warning: %s has an empty value and couldn't be set\n", k)
+
+			io.Warnf("%s has an empty value and couldn't be set\n", k)
 		} else {
 			variables = append(variables, &scalingo.Variable{
 				Name:  k,
