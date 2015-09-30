@@ -10,12 +10,12 @@
 ## Installation
 
 You can install the binary by:
-* Downloading it manually here: [heroku2scalingo](https://github.com/Scalingo/heroku2scalingo/releases/latest)
-  Unzipping it: `tar -xvf heroku2scalingo_0.1.1_linux_amd64.tar.gz`
+* Downloading it manually here: [heroku2scalingo](https://github.com/Scalingo/heroku2scalingo/releases/latest) <br>
+  Unzipping it: `tar -xvf heroku2scalingo_0.1.1_linux_amd64.tar.gz`<br>
   And placing it in one of your `$PATH`
-* Building it from source:
-  `git clone https://github.com/Scalingo/heroku2scalingo.git`
-  `godep go build`
+* Building it from source:<br>
+  `git clone https://github.com/Scalingo/heroku2scalingo.git`<br>
+  `godep go build`<br>
   And then placing `heroku2scalingo` to one of your `$PATH`
 
 ## Usage
