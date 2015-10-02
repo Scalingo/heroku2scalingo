@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/code.google.com/p/gopass"
+	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/cli/term"
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo"
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/github.com/Scalingo/go-scalingo/users"
 	"github.com/Scalingo/heroku2scalingo/Godeps/_workspace/src/gopkg.in/errgo.v1"
@@ -104,7 +104,7 @@ func tryAuth() (*users.User, error) {
 		}
 	}
 
-	password, err := gopass.GetPass("Password: ")
+	password, err := term.Password("Password: ")
 	if err != nil {
 		return nil, errgo.Mask(err, errgo.Any)
 	}
