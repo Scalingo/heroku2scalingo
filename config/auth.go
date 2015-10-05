@@ -25,6 +25,24 @@ type AuthConfigData struct {
 
 var Authenticator = &HtoSAuthenticator{}
 
+func LoadAuthOrLogin() (*users.User, error) {
+	u, err := Authenticator.LoadAuth()
+	if err != nil {
+		return nil, err
+	}
+	if u == nil {
+		u, err = Auth()
+		if err != nil {
+			return nil, err
+		}
+		err = Authenticator.StoreAuth(u)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return u, nil
+}
+
 func Auth() (*users.User, error) {
 	var user *users.User
 	var err error
