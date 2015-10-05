@@ -1,4 +1,6 @@
-# Migration tool: from Heroku to Scalingo in a minute
+# heroku2scalingo
+
+Migrate from [Heroku](https://heroku.com) to [Scalingo](https://scalingo.com) in a minute.
 
 ## Installation
 
