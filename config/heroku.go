@@ -16,7 +16,7 @@ var (
 	herokuApiUrl = "api.heroku.com"
 )
 
-func init() {
+func InitHerokuAuth() {
 	apiKey := ""
 	usr, err := user.Current()
 	if err != nil {

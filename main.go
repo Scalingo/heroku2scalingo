@@ -75,6 +75,7 @@ func main() {
 
 	go signals.Handle()
 
+	config.InitHerokuAuth()
 	io.Infof("Heroku authentication... ")
 	var err error
 	HerokuApp, err = config.HerokuClient.AppInfo(os.Args[1])
@@ -85,7 +86,7 @@ func main() {
 	fmt.Println("OK")
 
 	io.Infof("Scalingo authentication... ")
-	u, err := config.Authenticator.LoadAuth()
+	u, err := config.LoadAuthOrLogin()
 	if err != nil {
 		fmt.Println("ERR")
 		io.Error(err)
