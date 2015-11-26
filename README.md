@@ -20,7 +20,7 @@ heroku2scalingo <app_name>
 ```
 
 The following operations will be performed in this order:
-* Autenthication to Scalingo
+* Authentication to Scalingo
 * Authentication to Heroku API
 * Creation of Scalingo app
 * Get/Set environment variables
