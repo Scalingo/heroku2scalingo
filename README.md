@@ -1,3 +1,7 @@
+## Deprecation
+
+This repository is now archived (since 2025-12-24).
+
 # heroku2scalingo
 
 Migrate from [Heroku](https://heroku.com) to [Scalingo](https://scalingo.com) in a minute.
